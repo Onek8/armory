@@ -792,11 +792,9 @@ def make_forward_base(con_mesh, parse_opacity=False, transluc_pass=False):
 
     if '_VoxelRefract' in wrd.world_defs and parse_opacity:
         frag.write('if (opacity < 1.0) {')
-<<<<<<<<< Temporary merge branch 1:blender/arm/material/make_mesh.py
         frag.write('vec3 refraction = traceRefraction(wposition, n, voxels, voxelsSDF, normalize(eye - wposition), ior, roughness, clipmaps, gl_FragCoord.xy).rgb;')
         frag.write('    indirect = mix(refraction, indirect, opacity) * voxelgiRefr;')
         frag.write('    direct = mix(refraction, direct, opacity) * voxelgiRefr;')
-=========
         frag.write('    vec3 refraction = traceRefraction(wposition, n, voxels, voxelsSDF, vVec, ior, roughness, clipmaps, texCoord).rgb * voxelgiRefr;')
         frag.write('    indirect = mix(refraction, indirect, opacity);')
         frag.write('    direct = mix(refraction, direct, opacity);')
